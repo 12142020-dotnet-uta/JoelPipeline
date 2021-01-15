@@ -1,0 +1,45 @@
+﻿@model ModelLayer.ViewModels.StatisticsViewModel
+
+@{
+    ViewData["Title"] = "GetStatistics";
+}
+
+<h1>GetStatistics</h1>
+
+<div>
+    <h4>StatisticsViewModel</h4>
+    <h5>Out of the total item sold, these are the Sales percentages</h5>
+    <hr />
+   
+    
+            <dl class="row">
+                <dt class="col-sm-10">
+                    @Html.DisplayNameFor(model => model.GuitarP) 
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.GuitarP) %
+                </dd>
+                <dt class="col-sm-10">
+                    @Html.DisplayNameFor(model => model.CaseP)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CaseP) %
+                </dd>
+                <dt class="col-sm-10">
+                    @Html.DisplayNameFor(model => model.AmplifierP)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.AmplifierP) %
+                </dd>
+                <dt class="col-sm-10">
+                    @Html.DisplayNameFor(model => model.StringsP)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.StringsP) %
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-controller="StoreLocation" asp-action="LogOut">Log Out</a>
+            <a asp-action="AdminView">Back</a>
+        </div>

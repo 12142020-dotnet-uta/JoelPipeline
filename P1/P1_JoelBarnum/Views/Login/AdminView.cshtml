@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "AdminView";
+}
+
+<h1>Admin Menu</h1>
+<form asp-controller="Login" asp-action="SearchByCustName">
+    <p>
+        Search customer history by first and last name.
+    </p>
+    <p class="form-group">
+        First Name: <input type="text" name="SearchString1" />
+    </p>
+    <p>
+        Last Name: <input type="text" name="SearchString2" />
+        <input type="submit" value="search" />
+    </p>
+    @*<div class="form-group">
+            <input asp-for="inventory" type="hidden" />
+        </div>
+        <div class="form-group">
+            <input asp-for="inventory" type="hidden" />
+        </div>*@
+</form>
+<form asp-controller="Login" asp-action="ListStoreOrderHistory" method="get">
+    <p>
+        Search Store history by Store location name.
+    </p>
+    <p>
+        Store Name: <input type="text" name="SearchString" />
+        <input type="submit" value="search" />
+    </p>
+</form>
+<form asp-controller="Login" asp-action="ListAllCustomers" method="get">
+    <input type="submit" value="List All Customers" />
+
+</form>
+<span><form asp-controller="Login" asp-action="GetStatistics"><input type="submit" value="Sales Statistics"/></form></span>
+<a asp-controller="StoreLocation" asp-action="LogOut">Log Out</a>
+
+@*<span><a asp-controller="Login" asp-action="SearchAllHistorey">Search All History</a></span>
+    <span><a asp-controller="Login" asp-action="Choice" asp-route-LocationAbreviation="Huntington Beach">Huntington Beach</a></span>
+    <span><a asp-controller="Login" asp-action="Choice" asp-route-LocationAbreviation="Irvine">Irvine</a></span>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,158 @@
+﻿@model ModelLayer.ViewModels.CustomerStorelocationProductsViewModel
+
+@{
+    ViewData["Title"] = "StoreLocation2";
+}
+
+<h1>@Model.storeLocation.location Guitar World </h1>
+
+<div>
+    <h4>StoreLocation2.cshtml</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+</div>
+<div class="col-md-8">
+    <ul class="list-group">
+
+        @foreach (var item in Model.inventory)
+        {
+
+            foreach (var x in Model.products)
+            {
+                if (item.productId == x.ProductId)
+                {
+                    <li class="list-group-item">Item Name: @x.productName   Qty in stock: @item.quantity         Price: @x.productPrice</li>
+                }
+            }
+        }
+    </ul>
+
+</div>
+<div class="row">
+    <div class="col-2">
+        <form asp-action="AddToCart">
+            <div class="form-group">
+                <label asp-for="VMproductName" class="control-label"></label>
+                <input asp-for="VMproductName" class="form-control" />
+                <span asp-validation-for="VMproductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="quantityToAddToCart" class="control-label"></label>
+                <input asp-for="quantityToAddToCart" class="form-control" />
+                <span asp-validation-for="quantityToAddToCart" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="inventory" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input asp-for="customer" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input asp-for="storeLocation" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input asp-for="numOfGuitars" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input asp-for="numOfCases" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input asp-for="numOfAmplifiers" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input asp-for="numOfStrings" type="hidden" />
+            </div>
+            <div class="form-group">
+                <fieldset>
+                    Default Store <select asp-for="defaultStore" class="form-control">
+
+                        <option selected="selected" value="@Model.defaultStore"></option>
+
+                        <option value="Dana Point">Dana Point</option>
+
+                        <option value="Huntington Beach">Huntington Beach</option>
+
+                        <option value="Irvine">Irvine</option>
+
+                    </select>
+
+                    @*<p><input type="submit" value="Submit" /> </p>*@
+
+                </fieldset>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add To Cart" class="btn btn-primary" />
+            </div>
+
+        </form>
+        <form>
+            <span><div><a asp-controller="StoreLocation" asp-action="GetCart">View Cart</a></div></span>
+
+            @*<div class="form-group">
+                <input asp-for="defaultStore" type="checkbox" value="@Model.storeLocation" />
+            </div>*@
+        </form>
+        <form asp-controller="StoreLocation" asp-action="CustHistFromStore">
+            <p class="form-group">
+                 <input type="hidden" name="SearchString1" value="@Model.customer.firstName"/>
+            </p>
+            <p>
+                 <input type="hidden" name="SearchString2" value="@Model.customer.lastName"/>
+            </p>
+            <input type="submit" value="See Your Purchase Hostory"  />
+        </form>
+            @*<form asp-controller="StoreLocation"  asp-action="SetDefaultStore">
+
+                <fieldset>
+                    Movie Type <select id="MovieType" name="MovieType">
+
+                        <option value=""></option>
+
+                        <option value="0">Action</option>
+
+                        <option value="1">Drama</option>
+
+                        <option selected="selected" value="2">Comedy</option>
+
+                        <option value="3">Science Fiction</option>
+
+                    </select>
+
+                    <p><input type="submit" value="Submit" /> </p>
+
+                </fieldset>
+
+            </form>*@
+    </div>
+</div>
+
+<!--<div class="row">
+    <div class="col-md-2">
+        <form asp-action="AddToCart">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="itemNumber" class="control-label"></label>
+                <input asp-for="itemNumber" class="form-control" />
+                <span asp-validation-for="itemNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Qty" class="control-label"></label>
+                <input asp-for="Qty" class="form-control" />
+                <span asp-validation-for="Qty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>-->
+
+<div>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
+    <a asp-controller="StoreLocation" asp-action="LogOut">Log out</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

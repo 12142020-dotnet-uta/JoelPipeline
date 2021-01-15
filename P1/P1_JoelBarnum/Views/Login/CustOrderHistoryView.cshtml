@@ -1,0 +1,96 @@
+﻿@model ModelLayer.ViewModels.OrderViewModelList
+
+@{
+    ViewData["Title"] = "CustOrderHistoryView";
+}
+
+<h1>CustOrderHistoryView</h1>
+
+<div>
+    <h4>Here Is Your Order</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+</div>
+
+<a asp-action="AdminView">Back</a>
+@foreach (var item in Model.orderViewModelsList)
+{<div class="col-md-8">
+
+        <ul class="list-group">
+            <li class="list-group-item">Customer: @item.cusomerName</li>
+            @if (item.guitar != null)
+            {
+                <li class="list-group-item">Item Name: @item.guitar   Qty: @item.guitarQty         Price: @item.GuitarPrice</li>
+            }
+            @if (item.Case != null)
+            {
+                <li class="list-group-item">Item Name: @item.Case   Qty: @item.CaseQty         Price: @item.CaseQty</li>
+            }
+            @if (item.amplifier != null)
+            {
+                <li class="list-group-item">Item Name: @item.amplifier   Qty: @item.amplifierQty         Price: @item.amplifierPrice</li>
+            }
+            @if (item.strings != null)
+            {
+                <li class="list-group-item">Item Name: @item.strings   Qty: @item.stringsQty         Price: @item.stringPrice</li>
+            }
+            <li class="list-group-item">Total: @{string num = string.Format("{0:0.00}", item.totalPrice);} @num</li>
+            <li class="list-group-item">Date: @item.dateTime</li>
+        </ul>
+
+    </div>
+}
+
+
+<@*dl class="row">
+    @foreach(var item in OrderViewModel)
+        @if (item.guitar != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayFor(item => item.)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(Model => Model.guitarQty)
+            </dd>
+        }
+        @if (Model.strings != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayFor(model => model.strings)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.stringsQty)
+            </dd>
+        }
+        @if (Model.Case != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayFor(model => model.Case)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CaseQty)
+            </dd>
+        }
+        @if (Model.amplifier != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayFor(model => model.amplifier)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.amplifierQty)
+            </dd>
+        }
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.totalPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.totalPrice)
+        </dd>
+    </dl>*@
+    <div>
+        @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
+        <a asp-action="AdminView">Back</a>
+        
+    </div>
