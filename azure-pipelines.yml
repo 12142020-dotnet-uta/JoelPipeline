@@ -13,5 +13,20 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'JoelPipelineServiceConnection'
+    organization: 'joelpipeline'
+    scannerMode: 'MSBuild'
+    projectKey: 'JoelPipeline_JoelPipelineProject'
+    projectName: 'JoelPipelineProject'
+
 - script: dotnet build ./12142020-dotnet-uta/JoelPipeline --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
