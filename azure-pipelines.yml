@@ -22,7 +22,7 @@ steps:
     projectKey: 'JoelPipeline_JoelPipelineProject'
     projectName: 'JoelPipelineProject'
 
-- script: dotnet build ./P1_JoelBarnum --configuration $(buildConfiguration)
+- script: dotnet build ./P1/P1_JoelBarnum --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
 - task: SonarCloudAnalyze@1
