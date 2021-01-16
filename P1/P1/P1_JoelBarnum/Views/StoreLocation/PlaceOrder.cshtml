@@ -1,0 +1,62 @@
+﻿@model ModelLayer.ViewModels.CartViewModel
+
+@{
+    ViewData["Title"] = "PlaceOrder";
+}
+
+<h1>Thank You For Your Order. Have a Wonderful Day!</h1>
+
+<div>
+    <h4>CartViewModel</h4>
+    <hr />
+    <dl class="row">
+        @if (Model.guitar != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayFor(model => model.guitar)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.guitarQty)
+            </dd>
+        }
+        @if (Model.strings != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayFor(model => model.strings)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.stringsQty)
+            </dd>
+        }
+        @if (Model.Case != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayFor(model => model.Case)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CaseQty)
+            </dd>
+        }
+        @if (Model.amplifier != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayFor(model => model.amplifier)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.amplifierQty)
+            </dd>
+        }
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.totalPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @{string num = string.Format("{0:0.00}", Model.totalPrice);} @num
+        </dd>
+    </dl>
+    </dl>
+</div>
+<div>
+   
+    <a asp-controller="StoreLocation" asp-action="LogOut">Log Out</a>
+</div>
