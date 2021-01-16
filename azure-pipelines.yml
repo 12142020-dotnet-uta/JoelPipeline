@@ -22,9 +22,22 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'JoelPipeline_JoelPipelineProject'
     projectName: 'JoelPipelineProject'
-
+    extraProperties: 
+      sonar.exclusions=**/lib/**
+    
 - script: dotnet build ./P1/P1_JoelBarnum --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'P1/StoreTests/StoreTests.csproj'
+    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Agent.TempDirectory)/*/cobertura/coverage.xml'
 
 - task: SonarCloudAnalyze@1
   displayName: 'analyze'
@@ -33,3 +46,4 @@ steps:
   displayName: 'publishing'
   inputs:
     pollingTimeoutSec: '300'
+
