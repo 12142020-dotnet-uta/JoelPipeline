@@ -12,13 +12,31 @@ namespace RepositoryLayer
 {
     public class Repository : IStatistic
     {
-        static GwDbContext DbContext = new GwDbContext();
-        DbSet<Customer> customers = DbContext.customers;
-        DbSet<Product> products = DbContext.products;
-        DbSet<Order> orderHistory = DbContext.orderHistory;
-        DbSet<StoreLocation> storeLocations = DbContext.storeLocations;
-        DbSet<Inventory> allInventory = DbContext.allInventory;
-        DbSet<PurchasedProducts> purchasedProducts = DbContext.purchasedProducts;
+        private GwDbContext DbContext;
+        DbSet<Customer> customers;
+        DbSet<Product> products;
+        DbSet<StoreLocation> storeLocations;
+        DbSet<Inventory> allInventory;
+        DbSet<PurchasedProducts> purchasedProducts;
+        DbSet<Order> orderHistory;
+        public Repository(GwDbContext gwDbContext)
+        {
+            DbContext = gwDbContext;
+            this.customers = DbContext.customers;
+            this.products = DbContext.products;
+            this.storeLocations = DbContext.storeLocations;
+            this.allInventory = DbContext.allInventory;
+            this.purchasedProducts = DbContext.purchasedProducts;
+            this.orderHistory = DbContext.orderHistory;
+        }
+
+        //static GwDbContext DbContext = new GwDbContext();
+        //DbSet<Customer> customers = DbContext.customers;
+        //static DbSet<Product> products = DbContext.products;
+        //static DbSet<Order> orderHistory = DbContext.orderHistory;
+        //static DbSet<StoreLocation> storeLocations = DbContext.storeLocations;
+        //static DbSet<Inventory> allInventory = DbContext.allInventory;
+        //static DbSet<PurchasedProducts> purchasedProducts = DbContext.purchasedProducts;
         
 
         public List<Customer> GetAllCustomers()
@@ -39,10 +57,10 @@ namespace RepositoryLayer
         {
 
         }
-        public Repository(GwDbContext context)
-        {
-            Repository.DbContext = context;
-        }
+        //public Repository(GwDbContext context)
+        //{
+        //    Repository.DbContext = context;
+        //}
         public void Save()
         {
             DbContext.SaveChanges();
@@ -125,7 +143,7 @@ namespace RepositoryLayer
         /// <returns></returns>    
         public List<Product> GetProducts()
         {
-            //Console.WriteLine("---this is just inside of the GetProducts() method");
+            
             List<Product> p = new List<Product>();
 
             foreach (var item in products)
@@ -589,10 +607,7 @@ namespace RepositoryLayer
             model.CaseP = CaseP;
             model.AmplifierP = AmplifierP;
             model.StringsP = StringsP;
-            //Console.WriteLine($"Guitar sales are {GuitarP}% of the total items sold");
-            //Console.WriteLine($"Guitar Case sales are {CaseP}% of the total items sold");
-            //Console.WriteLine($"Amplifier sales are {AmplifierP}% of the total items sold");
-            //Console.WriteLine($"Guitar String sales are {StringsP}% of the total items sold");
+           
 
 
             return model;

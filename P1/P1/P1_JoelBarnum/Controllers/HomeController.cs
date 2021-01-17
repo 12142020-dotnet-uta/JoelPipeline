@@ -12,7 +12,8 @@ namespace P1_JoelBarnum.Controllers
 {
     public class HomeController : Controller
     {
-        BusinessLogicClass businessLogicClass = new BusinessLogicClass();
+
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)

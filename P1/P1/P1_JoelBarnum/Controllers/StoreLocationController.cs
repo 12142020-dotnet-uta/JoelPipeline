@@ -13,7 +13,14 @@ namespace P1_JoelBarnum.Controllers
     public class StoreLocationController : Controller
     {
          
-        BusinessLogicClass blc = new BusinessLogicClass();
+        private readonly BusinessLogicClass blc;
+
+        public StoreLocationController(BusinessLogicClass businessLogicClass)
+        {
+            blc = businessLogicClass;
+        }
+
+
         // GET: StoreLocationController
         public ActionResult Choice(string LocationAbreviation)
         {

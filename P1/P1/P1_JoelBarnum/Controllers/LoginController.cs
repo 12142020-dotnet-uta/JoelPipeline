@@ -14,8 +14,15 @@ namespace P1_JoelBarnum.Controllers
     public class LoginController : Controller
     {
 
+        private readonly BusinessLogicClass blc;
 
-        BusinessLogicClass blc = new BusinessLogicClass();
+        public LoginController(BusinessLogicClass businessLogicClass)
+        {
+            blc = businessLogicClass;
+        }
+
+
+        //BusinessLogicClass blc = new BusinessLogicClass();
         // GET: Login
         //[ActionName("Login")]
         public ActionResult Login()

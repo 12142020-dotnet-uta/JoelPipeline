@@ -9,23 +9,23 @@ namespace BusinessLogicLayer
 {
     public class BusinessLogicClass
     {
-        //private readonly Repository rs;
-        //public BusinessLogicClass(Repository repository)
-        //{
-        //    rs = repository;
-        //}
+        private readonly Repository rs;
+        public BusinessLogicClass(Repository repository)
+        {
+            rs = repository;
+        }
         public BusinessLogicClass() { }
 
         //GwDbContext DbContext = new GwDbContext();
-        static Repository rs = new Repository();
+        //static Repository rs = new Repository();
         //CustomerStorelocationProductsViewModel customerStorelocationProductsViewModel = new ModelLayer.ViewModels.CustomerStorelocationProductsViewModel();
         static Customer loggedInCustBLC = new Customer();
-        static List<Inventory> currentStoreInventory = new List<Inventory>();
+        //static List<Inventory> currentStoreInventory = new List<Inventory>();
         static StoreLocation currentStore = new StoreLocation();
-        static List<Product> allProducts = rs.GetProducts();
+        // List<Product> allProducts = rs.GetProducts();
         static List<Product> currentCartProducts = new List<Product>();
-        static List<Customer> allCustomers = rs.GetAllCustomers();
-        static List<PurchasedProducts> purchasedProducts1 = rs.GetAllPurchasedProducts();
+        //static List<Customer> allCustomers = rs.GetAllCustomers();
+        //static List<PurchasedProducts> purchasedProducts1 = rs.GetAllPurchasedProducts();
         public void PopulateDb()
         {
             rs.PopulateProducts();
@@ -33,7 +33,10 @@ namespace BusinessLogicLayer
 
         public CustomerStorelocationProductsViewModel SetNumOfProductsAndIds(CustomerStorelocationProductsViewModel c)
         {
-            foreach(var item in allProducts)
+            List<Inventory> currentStoreInventory = GetInventoryByStoreId(currentStore.StoreId);
+            //List<Inventory> currentStoreInventory = rs.GetInventoryByStIdPrI();
+            List<Product> allProducts = rs.GetProducts();
+            foreach (var item in allProducts)
             {
                 if(item.productName == "Guitar")
                 {
@@ -116,7 +119,7 @@ namespace BusinessLogicLayer
         /// <returns></returns>
         public OrderViewModelList GetOrderViewModels(List<Order> orderHist)
         {
-            
+            List<Product> allProducts = rs.GetProducts();
             List<OrderViewModel> listToDefineOrderViewModelList = new List<OrderViewModel>();
             List<PurchasedProducts> purchasedProducts1 = rs.GetAllPurchasedProducts();
             foreach ( var item in orderHist)
@@ -217,6 +220,7 @@ namespace BusinessLogicLayer
 
         public void AddItemsToCart(CustomerStorelocationProductsViewModel customerStorelocationProductsViewModel)
         {
+            List<Inventory> currentStoreInventory = GetInventoryByStoreId(currentStore.StoreId);
             List<Product> allProducts = GetAllProducts();
             //List<Product> cartProducts = new List<Product>();
             Inventory productInventory = new Inventory();
@@ -245,6 +249,7 @@ namespace BusinessLogicLayer
 
         public void EmptyCart()
         {
+            List<Inventory> currentStoreInventory = GetInventoryByStoreId(currentStore.StoreId);
             List<Product> allProducts = GetAllProducts();
             List<Product> cartProducts = new List<Product>();
             Inventory productInventory = new Inventory();
@@ -356,7 +361,7 @@ namespace BusinessLogicLayer
                     storeInventory.Add(item);
                 }
             }
-            currentStoreInventory = storeInventory;
+            //currentStoreInventory = storeInventory;
             return storeInventory;
         }
         public Customer GetCustById(Guid custId)
