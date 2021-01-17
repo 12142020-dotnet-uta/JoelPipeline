@@ -366,8 +366,7 @@ namespace BusinessLogicLayer
         }
         public Customer GetCustById(Guid custId)
         {
-            Customer cust = GetCustById(custId);
-            return cust;
+            return GetCustById(custId);
         }
         /// <summary>
         /// returns a list of all products
