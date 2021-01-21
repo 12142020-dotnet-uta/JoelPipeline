@@ -282,6 +282,13 @@ namespace RepositoryLayer
             return allInventory.ToList();
         }
 
+        public void SetDefaultStoreByCustId(Guid customerId, string defaultStore)
+        {
+            Customer cust = GetCustById(customerId);
+            cust.defaultStore = defaultStore;
+            DbContext.SaveChanges();
+        }
+
         /// <summary>
         /// a method to seed the database with porducts, StoerLocations, and Inventories
         /// </summary>
@@ -371,6 +378,13 @@ namespace RepositoryLayer
             // {
             //     Console.WriteLine(item.storeId);
             // }
+        }
+
+        public void DecrementInventory(Inventory x)
+        {
+            //Inventory inventory = allInventory.Where(item => item.invKey == x.invKey);
+            x.decrementInventory();
+            DbContext.SaveChanges();
         }
 
         /// <summary>
@@ -824,6 +838,17 @@ namespace RepositoryLayer
             Product p = GetProductByName(name);
             double price = p.productPrice;
             return price;
+        }
+        
+        /// <summary>
+        /// updates the deafualt store of a customer and takesin the customer and the location string of the new store
+        /// </summary>
+        /// <param name="cust"></param>
+        /// <param name="newStore"></param>
+        public void updateCustDefaultStore(Customer cust, string newStore)
+        {
+            cust.defaultStore = newStore;
+            DbContext.SaveChanges();
         }
     }//end of class
 }//end of namespace

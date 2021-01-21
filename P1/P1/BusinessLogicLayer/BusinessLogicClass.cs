@@ -179,9 +179,15 @@ namespace BusinessLogicLayer
             return list;
         }
 
+        public void ReserLogedInCust()
+        {
+            loggedInCustBLC = null;
+        }
+
         public void SetStoreLocation(string defaultstore)
         {
             loggedInCustBLC.defaultStore = defaultstore;
+            rs.updateCustDefaultStore(loggedInCustBLC, defaultstore);
         }
 
         public List<Order> SearchOrderHistoryByName(string searchString1, string searchString2)
@@ -194,15 +200,11 @@ namespace BusinessLogicLayer
 
         public Customer ValidateCust(string firstName, string lastName)
         {
-            try { 
+             
                 Customer LoggedInCustomer = rs.ValidateUserExists(firstName, lastName);
                 loggedInCustBLC = LoggedInCustomer;
                 return LoggedInCustomer;
-            }
-            catch (NullReferenceException e)
-            {
-                throw;
-            }
+            
         }
         public Customer GetLoggedInCustBLC()
         {
@@ -220,6 +222,7 @@ namespace BusinessLogicLayer
 
         public void AddItemsToCart(CustomerStorelocationProductsViewModel customerStorelocationProductsViewModel)
         {
+            rs.SetDefaultStoreByCustId(customerStorelocationProductsViewModel.customerId, customerStorelocationProductsViewModel.defaultStore);
             List<Inventory> currentStoreInventory = GetInventoryByStoreId(currentStore.StoreId);
             List<Product> allProducts = GetAllProducts();
             //List<Product> cartProducts = new List<Product>();
@@ -236,8 +239,10 @@ namespace BusinessLogicLayer
                             if(x.productId == item.ProductId)
                             {
                                 productInventory = x;
-                                x.decrementInventory();
+                                //x.decrementInventory();
+                                rs.DecrementInventory(x);
                                 rs.Save();
+                                
                                     
                             }
                         }
@@ -266,6 +271,7 @@ namespace BusinessLogicLayer
                             {
                                 productInventory = x;
                                 x.incrementInventory();
+
                                 rs.Save();
 
                             }
@@ -366,7 +372,7 @@ namespace BusinessLogicLayer
         }
         public Customer GetCustById(Guid custId)
         {
-            return GetCustById(custId);
+            return rs.GetCustById(custId);
         }
         /// <summary>
         /// returns a list of all products

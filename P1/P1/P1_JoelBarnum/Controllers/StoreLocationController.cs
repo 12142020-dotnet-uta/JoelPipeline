@@ -110,6 +110,7 @@ namespace P1_JoelBarnum.Controllers
             {
                 blc.EmptyCart();
             }
+            blc.ReserLogedInCust();
             return RedirectToAction("Index", "Home");
         }
 
