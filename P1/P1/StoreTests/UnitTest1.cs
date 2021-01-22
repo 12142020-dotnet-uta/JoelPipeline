@@ -13,7 +13,7 @@ namespace StoreTests
         Repository rs = new Repository();
         BusinessLogicClass blc = new BusinessLogicClass();
 
-        
+
         //[Fact]
         //public void ListOfAllProductsTest()
         //{
@@ -34,27 +34,27 @@ namespace StoreTests
         //    Customer cust = rs.GetCustById(newGuid);
         //    Assert.True(cust.firstName == "Jane");
         //}
-        //[Fact]
-        //public void getStoreByIdTest()
-        //{
-        //    Guid newGuid = Guid.Parse("1A03050E-4B09-4632-B2AD-6BA5C31C7D16");
-        //    StoreLocation store = rs.GetStoreLocationsStringById(newGuid);
-        //    Assert.True(store.location == "Irvine");
-        //}
-        //[Fact]
-        //public void getStoreByNameTest()
-        //{
-        //    Guid newGuid = Guid.Parse("1A03050E-4B09-4632-B2AD-6BA5C31C7D16");
-        //    StoreLocation store = rs.GetStoreLocationsByName("Irvine");
-        //    Assert.True(store.StoreId == newGuid);
-        //}
-        //[Fact]
-        //public void validateLoginTest()
-        //{
-        //    Guid newGuid = Guid.Parse("3B52D838-6014-42AA-934E-52F226C99AAA");
-        //    Customer cust = blc.ValidateCust("Jane", "Doe");
-        //    Assert.True(cust.CustomerId == newGuid);
-        //}
+        [Fact]
+        public void getStoreByIdTest()
+        {
+            Guid newGuid = Guid.Parse("1A03050E-4B09-4632-B2AD-6BA5C31C7D16");
+            StoreLocation store = rs.GetStoreLocationsStringById(newGuid);
+            Assert.True(store.location == "Irvine");
+        }
+        [Fact]
+        public void getStoreByNameTest()
+        {
+            Guid newGuid = Guid.Parse("1A03050E-4B09-4632-B2AD-6BA5C31C7D16");
+            StoreLocation store = rs.GetStoreLocationsByName("Irvine");
+            Assert.True(store.StoreId == newGuid);
+        }
+        [Fact]
+        public void validateLoginTest()
+        {
+            Guid newGuid = Guid.Parse("3B52D838-6014-42AA-934E-52F226C99AAA");
+            Customer cust = blc.ValidateCust("Jane", "Doe");
+            Assert.True(cust.CustomerId == newGuid);
+        }
         //[Fact]
         //public void GetLoggedInCustTest()
         //{
